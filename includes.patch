@@ -1,0 +1,15 @@
+--- grpc-0.15.0/config.m4~	2016-06-28 02:33:35.000000000 +0300
++++ grpc-0.15.0/config.m4	2016-07-20 22:29:20.633876591 +0300
+@@ -5,9 +5,9 @@
+   dnl Write more examples of tests here...
+ 
+   dnl # --with-grpc -> add include path
+-  PHP_ADD_INCLUDE(../../grpc/include)
+-  PHP_ADD_INCLUDE(../../grpc/src/php/ext/grpc)
+-  PHP_ADD_INCLUDE(../../grpc/third_party/boringssl/include)
++  PHP_ADD_INCLUDE(include)
++  PHP_ADD_INCLUDE(src/php/ext/grpc)
++  PHP_ADD_INCLUDE(third_party/boringssl/include)
+ 
+   LIBS="-lpthread $LIBS"
+ 

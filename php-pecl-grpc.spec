@@ -15,6 +15,7 @@ License:	BSD
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 # Source0-md5:	ba80ec5aa995d7b9e3df7d6d299bbd4b
+Patch0:		includes.patch
 URL:		http://pecl.php.net/package/grpc/
 %{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	%{php_name}-devel >= 4:5.5
@@ -37,12 +38,12 @@ clients and servers using any combination of the supported languages.
 %prep
 %setup -qc
 mv %{modname}-%{version}/* .
+%patch0 -p1
 
 %build
 phpize
 %configure
-%{__make} \
-	EXTRA_INCLUDES="-I include/ -I src/php/ext/grpc/ -I third_party/boringssl/include/"
+%{__make}
 
 %if %{with tests}
 # simple module load test
