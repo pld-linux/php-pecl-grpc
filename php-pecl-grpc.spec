@@ -41,7 +41,8 @@ mv %{modname}-%{version}/* .
 %build
 phpize
 %configure
-%{__make}
+%{__make} \
+	EXTRA_INCLUDES="-I include/ -I src/php/ext/grpc/ -I third_party/boringssl/include/"
 
 %if %{with tests}
 # simple module load test
