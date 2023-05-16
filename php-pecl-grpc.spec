@@ -9,13 +9,12 @@
 %define		modname	grpc
 Summary:	A high performance, general RPC framework that puts mobile and HTTP/2 first
 Name:		%{php_name}-pecl-%{modname}
-Version:	0.15.0
+Version:        1.54.0
 Release:	1
 License:	BSD
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
-# Source0-md5:	ba80ec5aa995d7b9e3df7d6d299bbd4b
-Patch0:		includes.patch
+# Source0-md5:	8c1912166e74799f2905fc1897e418b5
 URL:		http://pecl.php.net/package/grpc/
 %{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	%{php_name}-devel >= 4:5.5
@@ -39,7 +38,6 @@ clients and servers using any combination of the supported languages.
 %prep
 %setup -qc
 mv %{modname}-%{version}/* .
-%patch0 -p1
 
 %build
 phpize
@@ -50,8 +48,6 @@ phpize
 # simple module load test
 %{__php} -n -q \
 	-d extension_dir=modules \
-	-d extension=%{php_extensiondir}/pcre.so \
-	-d extension=%{php_extensiondir}/spl.so \
 	-d extension=%{modname}.so \
 	-m > modules.log
 grep %{modname} modules.log
