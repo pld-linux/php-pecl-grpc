@@ -10,7 +10,7 @@
 Summary:	A high performance, general RPC framework that puts mobile and HTTP/2 first
 Name:		%{php_name}-pecl-%{modname}
 Version:        1.54.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
