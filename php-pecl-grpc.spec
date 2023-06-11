@@ -15,6 +15,7 @@ License:	BSD
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 # Source0-md5:	8c1912166e74799f2905fc1897e418b5
+Patch0:		x32.patch
 URL:		http://pecl.php.net/package/grpc/
 %{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	%{php_name}-devel >= 4:5.5
@@ -37,7 +38,8 @@ clients and servers using any combination of the supported languages.
 
 %prep
 %setup -qc
-mv %{modname}-%{version}/* .
+%{__mv} %{modname}-%{version}/* .
+%patch0 -p1
 
 %build
 phpize

@@ -1,0 +1,25 @@
+--- php82-pecl-grpc-1.54.0/third_party/boringssl-with-bazel/src/crypto/fipsmodule/rand/getrandom_fillin.h~	2023-04-17 20:46:47.000000000 +0200
++++ php82-pecl-grpc-1.54.0/third_party/boringssl-with-bazel/src/crypto/fipsmodule/rand/getrandom_fillin.h	2023-06-11 14:11:10.444771738 +0200
+@@ -23,7 +23,11 @@
+ #include <sys/syscall.h>
+ 
+ #if defined(OPENSSL_X86_64)
++#if defined(__ILP32__)
++#define EXPECTED_NR_getrandom (__X32_SYSCALL_BIT + 318)
++#else
+ #define EXPECTED_NR_getrandom 318
++#endif
+ #elif defined(OPENSSL_X86)
+ #define EXPECTED_NR_getrandom 355
+ #elif defined(OPENSSL_AARCH64)
+--- php82-pecl-grpc-1.54.0/src/core/lib/gpr/wrap_memcpy.cc~	2023-04-17 20:46:47.000000000 +0200
++++ php82-pecl-grpc-1.54.0/src/core/lib/gpr/wrap_memcpy.cc	2023-06-11 14:19:36.499513469 +0200
+@@ -28,7 +28,7 @@
+ 
+ extern "C" {
+ #ifdef __linux__
+-#if defined(__x86_64__) && !defined(GPR_MUSL_LIBC_COMPAT) && \
++#if defined(__x86_64__) && !defined(__ILP32__) && !defined(GPR_MUSL_LIBC_COMPAT) && \
+     !defined(__ANDROID__)
+ __asm__(".symver memcpy,memcpy@GLIBC_2.2.5");
+ void* __wrap_memcpy(void* destination, const void* source, size_t num) {
